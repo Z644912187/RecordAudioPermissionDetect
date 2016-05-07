@@ -21,13 +21,12 @@ public class MainActivity extends AppCompatActivity implements RecordAudioPermis
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mRecordAudioPermissionDetect = new RecordAudioPermissionDetect(this);
+        mRecordAudioPermissionDetect = new RecordAudioPermissionDetect(this,this);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 mRecordAudioPermissionDetect.startCheckRecordPermission();
             }
         });
@@ -37,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements RecordAudioPermis
     @Override
     protected void onResume() {
         super.onResume();
+        Log.e(TAG,"-------isXiaoMi:" + DeviceInfoUtil.isXiaoMi());
+        Log.e(TAG,"-------isXiaoMi3C:" + DeviceInfoUtil.isXiaoMi3C());
+        Log.e(TAG,"-------getDeviceInfo:" + DeviceInfoUtil.getDeviceInfo());
         mRecordAudioPermissionDetect.startCheckRecordPermission();
     }
 
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements RecordAudioPermis
 
     @Override
     public void isPermit(boolean flag) {
+        Log.e(TAG,"-------isPermit:" + flag);
         if (!flag) {
             mRecordAudioPermissionDetect.showMissingPermissionDialog(this);
         }

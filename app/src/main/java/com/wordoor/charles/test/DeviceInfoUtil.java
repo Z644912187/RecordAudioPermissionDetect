@@ -9,6 +9,16 @@ import android.os.Build;
  */
 public class DeviceInfoUtil {
 
+    public static boolean isXiaoMi3C() {
+        String model = Build.MODEL;
+        String brand = Build.BRAND;
+        if (brand.equals("Xiaomi") && model.trim().contains("MI 3C")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public static boolean isXiaoMi() {
         String displayStr = Build.DISPLAY;
         String brand = Build.BRAND;
