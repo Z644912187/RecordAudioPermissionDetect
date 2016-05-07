@@ -62,6 +62,9 @@ public class DeviceInfoUtil {
         }
     }
 
+    public static boolean isHUAWEI() {
+        return Build.MANUFACTURER.equalsIgnoreCase("huawei") || Build.USER.equalsIgnoreCase("huawei") || Build.DEVICE.equalsIgnoreCase("huawei");
+    }
     /**
      * 获取设备信息
      */

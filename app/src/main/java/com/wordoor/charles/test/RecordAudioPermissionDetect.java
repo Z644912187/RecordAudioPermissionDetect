@@ -51,7 +51,7 @@ public class RecordAudioPermissionDetect {
     }
 
     private boolean setIsFilterMode() {
-        return DeviceInfoUtil.isXiaoMi();
+        return DeviceInfoUtil.isXiaoMi() || DeviceInfoUtil.isHUAWEI();
     }
 
     /**

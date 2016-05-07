@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity implements RecordAudioPermis
     @Override
     protected void onResume() {
         super.onResume();
-        Log.e(TAG,"-------isXiaoMi:" + DeviceInfoUtil.isXiaoMi());
-        Log.e(TAG,"-------isXiaoMi3C:" + DeviceInfoUtil.isXiaoMi3C());
-        Log.e(TAG,"-------getDeviceInfo:" + DeviceInfoUtil.getDeviceInfo());
+//        Log.e(TAG,"-------isXiaoMi3C:" + DeviceInfoUtil.isXiaoMi3C());
+//        Log.e(TAG,"-------isXiaoMi:" + DeviceInfoUtil.isXiaoMi());
+//        Log.e(TAG,"-------getDeviceInfo:" + DeviceInfoUtil.getDeviceInfo());
         mRecordAudioPermissionDetect.startCheckRecordPermission();
     }
 
