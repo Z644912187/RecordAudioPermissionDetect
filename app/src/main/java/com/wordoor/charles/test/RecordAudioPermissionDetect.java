@@ -19,7 +19,7 @@ import android.util.Log;
 /**
  * 根据分贝值判断当前应用的录音权限是否被第三方应用禁止了
  *
- * Created by lenovo on 2016/5/6.
+ * Created by zhuyifei on 2016/5/6.
  */
 public class RecordAudioPermissionDetect {
 
@@ -50,6 +50,10 @@ public class RecordAudioPermissionDetect {
         mIsOnSDK23 = (Build.VERSION.SDK_INT >= 23);
     }
 
+    /**
+     * TODO 对特定机型适配，需要的通过 或 操作 增加，如以下对小米，华为手机进行适配处理
+     * @return
+     */
     private boolean setIsFilterMode() {
         return DeviceInfoUtil.isXiaoMi() || DeviceInfoUtil.isHUAWEI();
     }
