@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements RecordAudioPermis
     public void isPermit(boolean flag) {
         Log.e(TAG,"-------isPermit:" + flag);
         if (!flag) {  //表示权限不允许，提示用户
-            mRecordAudioPermissionDetect.showMissingPermissionDialog(this);
+            mRecordAudioPermissionDetect.showMissingPermissionDialog(this,R.string.permission_string_help_text);
         } else {
             //TODO 注意 重新调用自己的录音操作，以重新获取麦克风资源
         }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
@@ -47,7 +48,7 @@ public class RecordAudioPermissionDetect {
         mContext = context;
         mIsFilterModel = setIsFilterMode();
         mOnPermitRecordListener = onPermitRecordListener;
-        mIsOnSDK23 = (Build.VERSION.SDK_INT >= 23);
+        mIsOnSDK23 = (getTargetVersion() >= 23) && (Build.VERSION.SDK_INT >= 23);
     }
 
     /**
@@ -103,6 +104,7 @@ public class RecordAudioPermissionDetect {
             if (mIsOnSDK23) {
                 mIsRecord = true;
                 if (lacksPermission(Manifest.permission.RECORD_AUDIO)) {
+                    mIsPermissionPermit = true;
                     return false;
                 } else {
                     return true;
@@ -182,14 +184,20 @@ public class RecordAudioPermissionDetect {
 
     private boolean isAlertShowing = false;
     // 显示缺失权限提示
-    public void showMissingPermissionDialog(final Context context) {
+    public void showMissingPermissionDialog(final Context context, int srcMessageId) {
         if (mIsRecord && !isAlertShowing) {
             isAlertShowing = true;
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setTitle(R.string.permission_hint);
-            builder.setMessage(R.string.permission_string_help_text);
+            builder.setMessage(srcMessageId);
             builder.setPositiveButton(R.string.permission_btn_ok, new DialogInterface.OnClickListener() {
                 @Override public void onClick(DialogInterface dialog, int which) {
+                    isAlertShowing = false;
+                }
+            });
+            builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
                     isAlertShowing = false;
                 }
             });
@@ -209,6 +217,17 @@ public class RecordAudioPermissionDetect {
     private boolean lacksPermission(String permission) {
         return ContextCompat.checkSelfPermission(mContext, permission) ==
                 PackageManager.PERMISSION_DENIED;
+    }
+
+    private int getTargetVersion() {
+        int targetSdkVersion = -1;
+        try {
+            PackageInfo packageInfo = mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0);
+            targetSdkVersion = packageInfo.applicationInfo.targetSdkVersion;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return targetSdkVersion;
     }
 
 }
