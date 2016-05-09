@@ -44,10 +44,10 @@ public class RecordAudioPermissionDetect {
     private boolean mIsOnSDK23 = false;
     private Context mContext;
 
-    public RecordAudioPermissionDetect(Context context, onPermitRecordListener onPermitRecordListener){
+    public RecordAudioPermissionDetect(Context context, OnPermitRecordListener OnPermitRecordListener){
         mContext = context;
         mIsFilterModel = setIsFilterMode();
-        mOnPermitRecordListener = onPermitRecordListener;
+        mOnPermitRecordListener = OnPermitRecordListener;
         mIsOnSDK23 = (getTargetVersion() >= 23) && (Build.VERSION.SDK_INT >= 23);
     }
 
@@ -78,7 +78,7 @@ public class RecordAudioPermissionDetect {
     }
 
     private AudioRecordTask mAudioRecordTask;
-    private onPermitRecordListener mOnPermitRecordListener;
+    private OnPermitRecordListener mOnPermitRecordListener;
     /**
      * 开始检查
      */
@@ -178,7 +178,7 @@ public class RecordAudioPermissionDetect {
         mIsRecord = false;
     }
 
-    public interface onPermitRecordListener {
+    public interface OnPermitRecordListener {
         void isPermit(boolean flag);
     }
 

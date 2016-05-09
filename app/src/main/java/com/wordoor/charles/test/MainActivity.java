@@ -6,10 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity implements RecordAudioPermissionDetect.onPermitRecordListener {
+public class MainActivity extends AppCompatActivity implements RecordAudioPermissionDetect.OnPermitRecordListener {
 
     private static final String TAG = "MainActivity";
     private RecordAudioPermissionDetect mRecordAudioPermissionDetect;
